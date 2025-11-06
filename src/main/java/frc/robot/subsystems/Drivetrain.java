@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.xrp.XRPGyro;
 import edu.wpi.first.wpilibj.xrp.XRPMotor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import edu.wpi.first.wpilibj.xrp.XRPRangefinder;
+
 public class Drivetrain extends SubsystemBase {
   private static final double kGearRatio =
       (30.0 / 14.0) * (28.0 / 16.0) * (36.0 / 9.0) * (26.0 / 8.0); // 48.75:1
@@ -38,6 +40,9 @@ public class Drivetrain extends SubsystemBase {
 
   // Set up the BuiltInAccelerometer
   private final BuiltInAccelerometer m_accelerometer = new BuiltInAccelerometer();
+
+  // Setup the range sensor
+  private final XRPRangefinder m_Rangefinder= new XRPRangefinder();
 
   /** Creates a new Drivetrain. */
   public Drivetrain() {
@@ -146,6 +151,11 @@ public class Drivetrain extends SubsystemBase {
   /** Reset the gyro. */
   public void resetGyro() {
     m_gyro.reset();
+  }
+
+  /** Get value from rangefinder */
+  public double getDistanceInches(){
+    return m_Rangefinder.getDistanceInches();
   }
 
   @Override
