@@ -11,6 +11,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
 import frc.robot.commands.DrivePolygon;
+import frc.robot.commands.FollowLine;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -78,6 +79,9 @@ public class RobotContainer {
     m_chooser.addOption("Auto Routine Time", new AutonomousTime(m_drivetrain));
     m_chooser.addOption("Drive Polygon(6)", new DrivePolygon(6,m_drivetrain));
     m_chooser.addOption("Drive Polygon(3)", new DrivePolygon(3,m_drivetrain));
+    m_chooser.addOption("FollowLine(1)", new FollowLine(1,m_drivetrain));
+    m_chooser.addOption("FollowLine(0.8)", new FollowLine(0.8,m_drivetrain));
+
     SmartDashboard.putData(m_chooser);
   }
 

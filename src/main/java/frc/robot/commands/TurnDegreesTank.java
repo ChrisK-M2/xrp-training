@@ -11,7 +11,7 @@ public class TurnDegreesTank extends Command {
   private final Drivetrain m_drive;
   private final double m_degrees;
   private final double m_speed;
-
+  public double angleGoal;
   /**
    * Creates a new TurnDegrees. This command will turn your robot for a desired rotation (in
    * degrees) and rotational speed.
@@ -33,6 +33,9 @@ public class TurnDegreesTank extends Command {
     // Set motors to stop, read encoder values for starting point
     m_drive.tankDrive(0, 0);
     m_drive.resetEncoders();
+    angleGoal = (m_drive.getGyroAngleZ()+m_degrees) % 360;
+  
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,14 +58,11 @@ public class TurnDegreesTank extends Command {
        has a wheel placement diameter (163 mm) - width of the wheel (8 mm) = 155 mm
        or 6.102 inches. We then take into consideration the width of the tires.
     */
-    double inchPerDegree = Math.PI * 6.102 / 360;
+    double currentAngle=m_drive.getGyroAngleZ();
+    boolean  closeEnough = Math.abs(currentAngle - angleGoal) < 5;
     // Compare distance travelled from start to distance based on degree turn
-    return getAverageTurningDistance() >= (inchPerDegree * m_degrees);
+    
+    return closeEnough;
   }
 
-  private double getAverageTurningDistance() {
-    double leftDistance = Math.abs(m_drive.getLeftDistanceInch());
-    double rightDistance = Math.abs(m_drive.getRightDistanceInch());
-    return (leftDistance+rightDistance)/2;
-  }
 }

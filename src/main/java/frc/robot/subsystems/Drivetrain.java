@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.xrp.XRPMotor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.xrp.XRPRangefinder;
+import edu.wpi.first.wpilibj.xrp.XRPReflectanceSensor;
 
 public class Drivetrain extends SubsystemBase {
   private static final double kGearRatio =
@@ -43,6 +44,8 @@ public class Drivetrain extends SubsystemBase {
 
   // Setup the range sensor
   private final XRPRangefinder m_Rangefinder= new XRPRangefinder();
+
+  private final XRPReflectanceSensor m_ReflectanceSensor = new XRPReflectanceSensor();
 
   /** Creates a new Drivetrain. */
   public Drivetrain() {
@@ -157,6 +160,15 @@ public class Drivetrain extends SubsystemBase {
   public double getDistanceInches(){
     return m_Rangefinder.getDistanceInches();
   }
+
+public double getLeftReflective(){
+  //Add your line here. It should return the reflectance value
+  return m_ReflectanceSensor.getLeftReflectanceValue();
+}
+
+public double getRightReflective(){
+  return m_ReflectanceSensor.getRightReflectanceValue();
+}
 
   @Override
   public void periodic() {
